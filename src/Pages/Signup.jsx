@@ -34,6 +34,7 @@ const fields = [
 
 function Signup() {
 
+    const API_URL = import.meta.env.VITE_API_URL;
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("")
@@ -55,7 +56,7 @@ function Signup() {
         async function saveData() {
 
             try {
-                let response = await fetch(`http://localhost:5000/api/auth/signup`, {
+                let response = await fetch(`${API_URL}api/auth/signup`, {
                     method: "POST",
 
                     headers: { "Content-Type": "application/json" },

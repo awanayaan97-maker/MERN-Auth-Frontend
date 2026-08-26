@@ -12,6 +12,7 @@ import Loader from "../Components/Loader";
 
 function ForgotPassword() {
     
+    const API_URL = import.meta.env.VITE_API_URL;
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("")
@@ -30,7 +31,7 @@ function ForgotPassword() {
 
         try {
 
-            let response = await fetch(`http://localhost:5000/api/auth/forget-password-otp`, {
+            let response = await fetch(`${API_URL}api/auth/forget-password-otp`, {
                 method: "POST",
 
                 headers: { "Content-Type": "application/json" },
@@ -68,7 +69,7 @@ function ForgotPassword() {
 
             try {
                 
-                let response = await fetch(`http://localhost:5000/api/auth/verify-forgot-password-otp`, {
+                let response = await fetch(`${API_URL}/api/auth/verify-forgot-password-otp`, {
                 method: "POST",
 
                 headers: { "Content-Type": "application/json" },
@@ -98,9 +99,6 @@ function ForgotPassword() {
 
    async function handleResetPassword() {
     
-    console.log("All good");
-    
-
     if(!password || !confirmPassword) return setResponse("All Feilds are required")
 
         if (password !== confirmPassword) return setResponse("Passwords do not match")
@@ -109,7 +107,7 @@ function ForgotPassword() {
 
         try {
             
-            let response = await fetch(`http://localhost:5000/api/auth/resetPassword`, {
+            let response = await fetch(`${API_URL}/api/auth/resetPassword`, {
                 method: "POST",
 
                 headers: { "Content-Type": "application/json" },

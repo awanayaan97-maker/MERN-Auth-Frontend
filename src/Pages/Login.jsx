@@ -23,6 +23,7 @@ const fields = [
 
 function Login() {
 
+    const API_URL = import.meta.env.VITE_API_URL;
     const navigate = useNavigate()
     const {data, inputHandler} = useForm({email: "", password: ""})
 
@@ -44,7 +45,7 @@ function Login() {
 
             try {
                 
-                let response = await fetch(`http://localhost:5000/api/auth/login`, {
+                let response = await fetch(`${API_URL}/api/auth/login`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(data)

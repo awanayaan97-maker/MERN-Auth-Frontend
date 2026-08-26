@@ -7,10 +7,10 @@ import ResponsePopup from "../Components/ResponsePopup";
 
 function Dashboard() {
 
-
+    const API_URL = import.meta.env.VITE_API_URL;
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false);
-     const [response, setResponse] = useState(null)
+    const [response, setResponse] = useState(null)
     const [data, setData] = useState(null)
 
     function handleLogout() {
@@ -30,7 +30,7 @@ function Dashboard() {
 
             try {
 
-                let response = await fetch(`http://localhost:5000/api/user`, {
+                let response = await fetch(`${API_URL}/api/user`, {
                     method: "GET",
 
                     headers: { "Authorization": `Bearer ${token}` },

@@ -10,6 +10,7 @@ import ResponsePopup from "../Components/ResponsePopup";
 
 function OTPVerification() {
 
+    const API_URL = import.meta.env.VITE_API_URL;
     const [otp, setOtp] = useState({otp: ""});
     const [loading, setLoading] = useState(false);
     const [response, setResponse] = useState("")
@@ -31,7 +32,7 @@ function OTPVerification() {
                 
                 setLoading(true)
 
-                let response = await fetch(`http://localhost:5000/api/auth/resendOTP`, {
+                let response = await fetch(`${API_URL}/api/auth/resendOTP`, {
                     method: "POST",
 
                     headers: { "Content-Type": "application/json" },
@@ -76,7 +77,7 @@ function OTPVerification() {
 
                 try {
                     
-                    let response = await fetch(`http://localhost:5000/api/auth/verification`, {
+                    let response = await fetch(`${API_URL}/api/auth/verification`, {
                     method: "POST",
 
                     headers: { "Content-Type": "application/json" },
