@@ -49,7 +49,7 @@ function Signup() {
 
         if (data.firstName === "" || data.lastName === "" || data.email === "" || data.password === "") return setResponse("All fields are required")
 
-        if(data.password.length !== 8) return setResponse("Password must be at least 8 characters.")
+        if(data.password.length < 8) return setResponse("Password must be at least 8 characters.")
 
         setLoading(true)
 
