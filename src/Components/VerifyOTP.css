@@ -1,0 +1,31 @@
+
+
+.resend-otp {
+    margin: 22px 0 0;
+
+    text-align: center;
+
+    color: #5b7cff;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+}
+
+.resend-otp:hover {
+    color: #7d96ff;
+}
+
+.forgot-heading strong {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #ffffff;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    word-break: break-word;
+}

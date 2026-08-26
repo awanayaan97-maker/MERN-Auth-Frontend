@@ -1,0 +1,181 @@
+
+
+import "./OTPVerification.css";
+
+import { data, useNavigate } from "react-router-dom";
+import "./OTPVerification.css";
+import { useEffect, useState } from "react";
+import Loader from "../Components/Loader";
+import ResponsePopup from "../Components/ResponsePopup";
+
+function OTPVerification() {
+
+    const [otp, setOtp] = useState({otp: ""});
+    const [loading, setLoading] = useState(false);
+    const [response, setResponse] = useState("")
+
+   let email = localStorage.getItem("email")
+    const navigate = useNavigate()
+
+
+    function handleOTP(e){
+        const value = e.target.value
+        const name = e.target.name
+       setOtp(prev => ({...prev, [name] : value}) )
+    }
+
+        
+        async function resendOTP() {
+            
+            try {
+                
+                setLoading(true)
+
+                let response = await fetch(`http://localhost:5000/api/auth/resendOTP`, {
+                    method: "POST",
+
+                    headers: { "Content-Type": "application/json" },
+
+                    body: JSON.stringify({email})
+                })
+
+
+                let data = await response.json()
+
+                if (data.statusCode === 200) {
+                    setResponse(data.message)
+                }
+
+                else if(data.statusCode === 400){
+                  setResponse(data.message)
+                  return
+                }
+
+            } 
+            
+            catch (error) {
+                setResponse(error.message)
+            }
+
+            finally{
+                setLoading(false)
+            }
+        }
+
+
+    function handleValidation(){
+
+     
+        if (otp.otp === "") return setResponse("Enter your OTP number")
+
+            async function verifyOTP() {
+
+                setLoading(true)
+                
+                let otpData = {email, otp: otp.otp}
+
+                try {
+                    
+                    let response = await fetch(`http://localhost:5000/api/auth/verification`, {
+                    method: "POST",
+
+                    headers: { "Content-Type": "application/json" },
+
+                    body: JSON.stringify(otpData)
+                })
+
+                let data = await response.json();
+
+                if (data.statusCode === 201) {
+                    setResponse("Signup successfully completed")
+                    navigate("/login")
+                }
+
+                else if (data.statusCode === 404) {
+                    setResponse(data.message)
+                    return
+                }
+
+                else if(data.statusCode === 429){
+                 setResponse(data.message)
+                 return
+                }
+
+                else if(data.statusCode === 400){
+                 setResponse(data.message)
+                 return
+                }
+
+                } 
+                
+                catch (error) {
+                    alert(data.message)
+                }
+
+                finally{
+                    setLoading(false)
+                }
+
+            }
+
+            verifyOTP()
+
+    }
+    
+
+    useEffect(() => {
+
+        if (!email) {
+            navigate("/")
+        }
+    }, [])
+
+    if (loading) {
+        return <Loader/>
+    }
+    
+    return (
+        <div className="verification-page">
+
+            {response ? <ResponsePopup message={response} closePopup={() => setResponse(null)}/> : ""}
+
+            <div className="verification-card">
+
+                <div className="verification-heading">
+                    <h1>Verify Your Email</h1>
+
+                    <p>
+                        Enter the 6-digit code sent to your email address.
+                    </p>
+                </div>
+
+                <div className="otp-input-wrapper">
+
+                    <input
+                        type="text"
+                        name="otp"
+                        value={otp.otp}
+                        onChange={handleOTP}
+                        placeholder="Enter 6-digit OTP"
+                        inputMode="numeric"
+                        maxLength="6"
+                    />
+
+                </div>
+
+                <button className="verify-button" onClick={handleValidation}>
+                    Verify OTP
+                </button>
+
+                <p className="resend-text">
+                    Didn't receive the code?
+                    <span onClick={() =>  resendOTP()}> Resend OTP</span>
+                </p>
+
+            </div>
+
+        </div>
+    );
+}
+
+export default OTPVerification;
