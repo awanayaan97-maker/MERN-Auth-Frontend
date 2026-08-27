@@ -56,7 +56,7 @@ function Signup() {
         async function saveData() {
 
             try {
-                let response = await fetch(`${API_URL}api/auth/signup`, {
+                let response = await fetch(`${API_URL}/api/auth/signup`, {
                     method: "POST",
 
                     headers: { "Content-Type": "application/json" },

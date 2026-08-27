@@ -31,7 +31,7 @@ function ForgotPassword() {
 
         try {
 
-            let response = await fetch(`${API_URL}api/auth/forget-password-otp`, {
+            let response = await fetch(`${API_URL}/api/auth/forget-password-otp`, {
                 method: "POST",
 
                 headers: { "Content-Type": "application/json" },

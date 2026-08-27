@@ -24,6 +24,8 @@ const fields = [
 function Login() {
 
     const API_URL = import.meta.env.VITE_API_URL;
+    console.log(API_URL);
+    
     const navigate = useNavigate()
     const {data, inputHandler} = useForm({email: "", password: ""})
 
