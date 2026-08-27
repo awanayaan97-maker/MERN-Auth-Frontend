@@ -23,7 +23,7 @@ A React interface for a full authentication system — signup with OTP verificat
 
 ```bash
 git clone <this-repo-url>
-cd mern-auth-frontend
+cd MERN-Auth-Frontend
 npm install
 ```
 
