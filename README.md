@@ -3,7 +3,7 @@
 A React interface for a full authentication system — signup with OTP verification, login, a protected dashboard, and a self-service password reset flow. Built to pair with a Node/Express/MongoDB backend.
 
 **Live app:** https://mern-auth-frontend-chi.vercel.app/
-**Backend repo:** [MERN-Auth-Backend](#)
+**Backend repo:** https://github.com/awanayaan97-maker/MERN-Auth-Backend
 
 ## What This Covers
 
