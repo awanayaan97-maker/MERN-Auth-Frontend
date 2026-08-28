@@ -34,12 +34,8 @@ function Login() {
 
 
     function handleValidation(){
-         console.log(data);
          
-        if (data.email === "" ||  data.password === "") {
-            setResponse("All fileds are required")
-            return
-        }
+        if (data.email === "" ||  data.password === "") return setResponse("All fileds are required")
 
         async function checkUser() {
             
@@ -55,15 +51,15 @@ function Login() {
 
                 let responseData = await response.json();
 
-                if (responseData.statusCode === 200) {
+                if (responseData.status === true) {
                     localStorage.setItem("token", responseData.token)
                     setResponse("login successfully")
                     navigate("/dashboard")
                 }
 
-                if (responseData.statusCode === 404) return setResponse(responseData.message)
-
-                if (responseData.statusCode === 500) return setResponse("Internel server error")
+               else {
+                  setResponse(responseData.message)
+               }
 
             } 
             

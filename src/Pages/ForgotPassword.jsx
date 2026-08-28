@@ -41,17 +41,17 @@ function ForgotPassword() {
 
             let data = await response.json()
 
-            if (data.statusCode === 200) {
+            if (data.status === true) {
                 setResponse(data.message)
                 setStep(2)
                 return
             }
 
-            else if (data.statusCode === 404)  return setResponse(data.message)
+            else setResponse(data.message)
         }
 
         catch (error) {
-            setResponse(data.message)
+            setResponse("Something went wrong. Please check your connection and try again.")
         }
 
         finally {
@@ -79,16 +79,14 @@ function ForgotPassword() {
 
             let data = await response.json()
 
-            if(data.statusCode === 200)  setStep(3)
-              
-            else if(data.statusCode === 404) return setResponse(data.message)
-
-            else if(data.statusCode === 400) return setResponse(data.message)
-
+            if(data.status === true)  setStep(3)
+            
+                else setResponse(data.message)
+            
             } 
             
             catch (error) {
-                setResponse(data.message)
+                setResponse("Something went wrong. Please check your connection and try again.")
             }
 
             finally{
@@ -117,16 +115,16 @@ function ForgotPassword() {
 
             let data = await response.json();
 
-            if (data.statusCode === 200) {
+            if (data.status === true) {
               setResponse("Your password has been reset successfully")
               navigate("/login")
             }
 
-            else if(data.statusCode === 400) return setResponse(data.message)
+            else setResponse(data.message)
         } 
         
         catch (error) {
-            setResponse(data.message)
+            setResponse("Something went wrong. Please check your connection and try again.")
         }
 
         finally{

@@ -12,6 +12,7 @@ function FormInput({ label, name, type = "text", placeholder, value, updateValue
                 placeholder={placeholder}
                 value={value}
                 onChange={(e) => updateValue(e)}
+                 autoComplete="off"
             />
         </div>
     );

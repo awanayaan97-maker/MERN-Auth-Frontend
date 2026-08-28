@@ -43,19 +43,13 @@ function OTPVerification() {
 
                 let data = await response.json()
 
-                if (data.statusCode === 200) {
-                    setResponse(data.message)
-                }
+                if (data.status === true) return setResponse(data.message)
 
-                else if(data.statusCode === 400){
-                  setResponse(data.message)
-                  return
-                }
-
+                else setResponse(data.message)
             } 
             
             catch (error) {
-                setResponse(error.message)
+                setResponse("Something went wrong. Please check your connection and try again.")
             }
 
             finally{
@@ -87,30 +81,17 @@ function OTPVerification() {
 
                 let data = await response.json();
 
-                if (data.statusCode === 201) {
+                if (data.status === true) {
                     setResponse("Signup successfully completed")
                     navigate("/login")
                 }
 
-                else if (data.statusCode === 404) {
-                    setResponse(data.message)
-                    return
-                }
-
-                else if(data.statusCode === 429){
-                 setResponse(data.message)
-                 return
-                }
-
-                else if(data.statusCode === 400){
-                 setResponse(data.message)
-                 return
-                }
+                else setResponse(data.message)
 
                 } 
                 
                 catch (error) {
-                    alert(data.message)
+                    setResponse("Something went wrong. Please check your connection and try again.")
                 }
 
                 finally{

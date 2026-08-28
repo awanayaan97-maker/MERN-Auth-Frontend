@@ -40,14 +40,13 @@ function Dashboard() {
 
                 console.log(data);
                 
-                if(data.statusCode === 200) return setData(data.data)
+                if(data.status === true) return setData(data.data)
 
-                    if(data.statusCode === 400) return setResponse(data.message)
-
+                else setResponse(data.message)
             }
 
             catch (error) {
-              setResponse(data.message)
+              setResponse("Something went wrong. Please check your connection and try again.")
             }
 
             finally {

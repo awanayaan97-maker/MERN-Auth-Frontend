@@ -67,19 +67,17 @@ function Signup() {
 
                 let responseData = await response.json();
 
-                if (responseData.statusCode === 200) {
+                if (responseData.status === true) {
                     localStorage.setItem("email", responseData.data.email)
                     navigate("/verification")
                 }
 
-                else if (responseData.statusCode === 409) return  setResponse(responseData.message)
-                    
-                else if (responseData.statusCode === 500) return setResponse(responseData.message)
+                else return setResponse(responseData.message)
 
             }
 
             catch (error) {
-                setResponse(error.message)
+                setResponse("Something went wrong. Please check your connection and try again.")
             }
 
             finally {
